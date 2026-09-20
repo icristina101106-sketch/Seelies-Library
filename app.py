@@ -78,22 +78,13 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 async def post_init(application):
-    """InicializaciÃƒÆ’Ã‚Â³n despuÃƒÆ’Ã‚Â©s de que se crea la aplicaciÃƒÆ’Ã‚Â³n"""
-        from telegram import BotCommand
-    commands = [
-        BotCommand("buscar", "🕞 Encuentra tu próximo libro"),
-        BotCommand("directorio", "🗂️ Explora elíndice de autores"),
-        BotCommand("pedir", "📖 Pide un libro que no encuentres"),
-        BotCommand("clasicos", "🏋️ Busca libros clásicos (<1950)"),
-        BotCommand("lanzamientos", "✨ Busca libros recientes"),
-        BotCommand("topaportadores", "🏆 Ranking de la comunidad"),
-        BotCommand("ayuda", "ℤ️ Manual interactivo del bot")
-    ]
-    try:
-        await application.bot.set_my_commands(commands)
-    except Exception as e:
-        print(f"Error seteando comandos: {e}")
-
+    """Inicializacion despues de que se crea la aplicacion"""
+    # Inicializar base de datos
+    await db.init()
+    
+    # Iniciar scheduler
+    scheduler_module.start(application)
+    
     from telegram import BotCommand
     commands = [
         BotCommand("buscar", "Encuentra tu proximo libro"),
@@ -109,6 +100,8 @@ async def post_init(application):
     except Exception as e:
         print(f"Error seteando comandos: {e}")
         
+    print("OK - Seelie inicializado correctamente")
+    print(f"Modo: {config.MODE}")
     print(f"Modo prueba: {config.TEST_MODE_ACTIVE}")
 
 def run_bot():
