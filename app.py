@@ -47,7 +47,7 @@ from handlers.commands import (
     cmd_pedidoincompleto, cmd_pedidofueraformato, cmd_pedidorepetido,
     cmd_stats, cmd_toppedidos, cmd_scanbiblioteca, cmd_invitar,
     cmd_buscar, cmd_topaportadores, cmd_respaldo, cmd_scanenlaces,
-    cmd_directorio, cmd_genero, cmd_recomiendame, cmd_masleidos, cmd_diascierre, cmd_mispedidos, cmd_nopermitir, cmd_sipermitir, cmd_vacaciones, cmd_configlog, cmd_miperfil, cmd_misaportes, cmd_estadisticas, cmd_exportarbiblioteca, cmd_pendientes, cmd_apelaciones, cmd_hoy, cmd_clasicos, cmd_lanzamientos, cmd_panel, cmd_auditoria, cmd_simular, cmd_sos, cmd_get, cmd_bajoperfil, cmd_cmds
+    cmd_directorio, cmd_genero, cmd_recomiendame, cmd_masleidos, cmd_diascierre, cmd_mispedidos, cmd_nopermitir, cmd_sipermitir, cmd_vacaciones, cmd_configlog, cmd_miperfil, cmd_misaportes, cmd_estadisticas, cmd_exportarbiblioteca, cmd_pendientes, cmd_apelaciones, cmd_hoy, cmd_clasicos, cmd_lanzamientos, cmd_panel, cmd_auditoria, cmd_simular, cmd_sos, cmd_get, cmd_bajoperfil, cmd_cmds, cmd_modulos
 )
 from modules.scheduler import scheduler_module
 from modules.requests import request_module
@@ -78,7 +78,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 async def post_init(application):
-    """Inicialización después de que se crea la aplicación"""
+    """InicializaciÃ³n despuÃ©s de que se crea la aplicaciÃ³n"""
     # Inicializar base de datos
     await db.init()
     
@@ -87,13 +87,13 @@ async def post_init(application):
     
     from telegram import BotCommand
     commands = [
-        BotCommand("buscar", "🔍 Encuentra tu próximo libro"),
-        BotCommand("directorio", "🗂️ Explora el índice de autores"),
-        BotCommand("pedir", "🙋‍♀️ Pide un libro que no encuentres"),
-        BotCommand("clasicos", "🕰️ Busca libros clásicos (<1950)"),
-        BotCommand("lanzamientos", "🆕 Busca libros recientes"),
-        BotCommand("topaportadores", "🏆 Ranking de la comunidad"),
-        BotCommand("ayuda", "💡 Manual interactivo del bot")
+        BotCommand("buscar", "ðŸ” Encuentra tu prÃ³ximo libro"),
+        BotCommand("directorio", "ðŸ—‚ï¸ Explora el Ã­ndice de autores"),
+        BotCommand("pedir", "ðŸ™‹â€â™€ï¸ Pide un libro que no encuentres"),
+        BotCommand("clasicos", "ðŸ•°ï¸ Busca libros clÃ¡sicos (<1950)"),
+        BotCommand("lanzamientos", "ðŸ†• Busca libros recientes"),
+        BotCommand("topaportadores", "ðŸ† Ranking de la comunidad"),
+        BotCommand("ayuda", "ðŸ’¡ Manual interactivo del bot")
     ]
     try:
         await application.bot.set_my_commands(commands)
@@ -106,53 +106,53 @@ async def post_init(application):
 
 def run_bot():
     """Ejecutar el bot de Telegram"""
-    # Crear aplicación
+    # Crear aplicaciÃ³n
     application = ApplicationBuilder().token(config.BOT_TOKEN).post_init(post_init).build()
     
-    # Comandos admin (inglés y español)
+    # Comandos admin (inglÃ©s y espaÃ±ol)
     application.add_handler(CommandHandler("start", start_command))
     
-    # Moderación
+    # ModeraciÃ³n
     application.add_handler(CommandHandler("warn", cmd_warn))
-    application.add_handler(CommandHandler("advertir", cmd_warn))  # español
+    application.add_handler(CommandHandler("advertir", cmd_warn))  # espaÃ±ol
     
     application.add_handler(CommandHandler("mute", cmd_mute))
-    application.add_handler(CommandHandler("silenciar", cmd_mute))  # español
+    application.add_handler(CommandHandler("silenciar", cmd_mute))  # espaÃ±ol
     
     application.add_handler(CommandHandler("unmute", cmd_unmute))
-    application.add_handler(CommandHandler("desmutear", cmd_unmute))  # español
+    application.add_handler(CommandHandler("desmutear", cmd_unmute))  # espaÃ±ol
     
     application.add_handler(CommandHandler("ban", cmd_ban))
-    application.add_handler(CommandHandler("expulsar", cmd_ban))  # español
+    application.add_handler(CommandHandler("expulsar", cmd_ban))  # espaÃ±ol
     
-    # Información
+    # InformaciÃ³n
     application.add_handler(CommandHandler("checkuser", cmd_checkuser))
-    application.add_handler(CommandHandler("verusuario", cmd_checkuser))  # español
+    application.add_handler(CommandHandler("verusuario", cmd_checkuser))  # espaÃ±ol
     
     application.add_handler(CommandHandler("history", cmd_history))
-    application.add_handler(CommandHandler("historial", cmd_history))  # español
+    application.add_handler(CommandHandler("historial", cmd_history))  # espaÃ±ol
     
     # Trusted
     application.add_handler(CommandHandler("trust", cmd_trust))
-    application.add_handler(CommandHandler("confiar", cmd_trust))  # español
+    application.add_handler(CommandHandler("confiar", cmd_trust))  # espaÃ±ol
     
     application.add_handler(CommandHandler("untrust", cmd_untrust))
-    application.add_handler(CommandHandler("quitarconfianza", cmd_untrust))  # español
+    application.add_handler(CommandHandler("quitarconfianza", cmd_untrust))  # espaÃ±ol
     
     # Perdonar
     application.add_handler(CommandHandler("forgive", cmd_forgive))
-    application.add_handler(CommandHandler("perdonar", cmd_forgive))  # español
+    application.add_handler(CommandHandler("perdonar", cmd_forgive))  # espaÃ±ol
     
     # Riesgo y config
     application.add_handler(CommandHandler("setrisk", cmd_setrisk))
     application.add_handler(CommandHandler("config", cmd_config))
-    application.add_handler(CommandHandler("ajustes", cmd_config))  # español
+    application.add_handler(CommandHandler("ajustes", cmd_config))  # espaÃ±ol
     
     application.add_handler(CommandHandler("modo", cmd_modo))
     
     # Foto
     application.add_handler(CommandHandler("checkfotos", cmd_checkfotos))
-    application.add_handler(CommandHandler("revisarfotos", cmd_checkfotos))  # español
+    application.add_handler(CommandHandler("revisarfotos", cmd_checkfotos))  # espaÃ±ol
     
     # Ayuda
     application.add_handler(CommandHandler("ayuda", cmd_ayuda))
@@ -165,6 +165,7 @@ def run_bot():
     application.add_handler(CommandHandler("buscar", cmd_buscar))
     application.add_handler(CommandHandler("get", cmd_get))
     application.add_handler(CommandHandler("cmds", cmd_cmds))
+    application.add_handler(CommandHandler("modulos", cmd_modulos))
     application.add_handler(CommandHandler("bajoperfil", cmd_bajoperfil))
     application.add_handler(CommandHandler("topaportadores", cmd_topaportadores))
     application.add_handler(CommandHandler("respaldo", cmd_respaldo))
@@ -174,12 +175,12 @@ def run_bot():
     
     # Pedidos
     application.add_handler(CommandHandler("done", request_module.cmd_done))
-    application.add_handler(CommandHandler("listo", request_module.cmd_done))  # español
+    application.add_handler(CommandHandler("listo", request_module.cmd_done))  # espaÃ±ol
     
     application.add_handler(CommandHandler("pedidos", request_module.cmd_pedidos))
-    application.add_handler(CommandHandler("solicitudes", request_module.cmd_pedidos))  # español
+    application.add_handler(CommandHandler("solicitudes", request_module.cmd_pedidos))  # espaÃ±ol
     
-    # Pedido incorrecto - variantes (revisión manual por admin)
+    # Pedido incorrecto - variantes (revisiÃ³n manual por admin)
     application.add_handler(CommandHandler("pedidoincorrecto", cmd_pedidoincorrecto))
     application.add_handler(CommandHandler("pedidoincompleto", cmd_pedidoincompleto))
     application.add_handler(CommandHandler("pedidofueraformato", cmd_pedidofueraformato))
@@ -209,9 +210,9 @@ def run_bot():
     application.add_handler(CommandHandler("lanzamientos", cmd_lanzamientos))
     application.add_handler(CommandHandler("panel", cmd_panel))
     
-    # Manejador de DM interactivo /pedido (ConversationHandler) - inglés y español
+    # Manejador de DM interactivo /pedido (ConversationHandler) - inglÃ©s y espaÃ±ol
     application.add_handler(request_module.get_conversation_handler())
-    # Alias español para /pedido
+    # Alias espaÃ±ol para /pedido
     application.add_handler(ConversationHandler(
         entry_points=[CommandHandler('pedir', request_module.cmd_pedido)],
         states={
@@ -233,7 +234,7 @@ def run_bot():
         handle_new_member
     ))
     
-    # Handler para solicitudes de unión
+    # Handler para solicitudes de uniÃ³n
     application.add_handler(ChatJoinRequestHandler(handle_join_request))
     
     # Handler para actualizaciones de estado de miembros (ej. uso de links)
@@ -245,7 +246,7 @@ def run_bot():
         handle_group_message
     ))
     
-    # Handler de mensajes privados (Fase 5: Reenvíos y OCR)
+    # Handler de mensajes privados (Fase 5: ReenvÃ­os y OCR)
     from handlers.messages import handle_private_message
     application.add_handler(MessageHandler(
         filters.ChatType.PRIVATE & ~filters.COMMAND,
@@ -291,7 +292,7 @@ def run_bot():
     )
 
 def main():
-    """Función principal - inicia bot y servidor web"""
+    """FunciÃ³n principal - inicia bot y servidor web"""
     print("\n" + "=" * 60)
     print("SEELIE - SISTEMA DE MODERACION")
     print("=" * 60)
