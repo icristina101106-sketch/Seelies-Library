@@ -1856,3 +1856,12 @@ async def cmd_topaportadores(update: Update, context: ContextTypes.DEFAULT_TYPE)
     msg += "\n¡Gracias a quienes comparten! 📚"
     
     await _send(context, chat_id, thread_id, msg, parse_mode='Markdown')
+
+async def cmd_respaldo(update, context):
+    if update.effective_user.id in config.ADMIN_IDS:
+        await update.message.reply_text("✅ Respaldo iniciado. (Función en desarrollo).")
+
+async def cmd_scanenlaces(update, context):
+    if update.effective_user.id in config.ADMIN_IDS:
+        await update.message.reply_text("🔍 Escaneando enlaces... (Función en desarrollo).")
+
