@@ -261,6 +261,27 @@ def run_bot():
     
     print("OK - Seelie esta corriendo...")
     
+    # [FASE 5] Servidor Web Falso para plataformas gratuitas (Render)
+    import os
+    import threading
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+    
+    class DummyHandler(BaseHTTPRequestHandler):
+        def do_GET(self):
+            self.send_response(200)
+            self.send_header('Content-type','text/html')
+            self.end_headers()
+            self.wfile.write(b"Selene is awake and watching!")
+            
+    def run_dummy_server():
+        port = int(os.environ.get("PORT", 10000))
+        server = HTTPServer(('0.0.0.0', port), DummyHandler)
+        server.serve_forever()
+        
+    if os.environ.get("RENDER") or os.environ.get("PORT"):
+        threading.Thread(target=run_dummy_server, daemon=True).start()
+        print("Servidor web iniciado para Render.")
+    
     # Ejecutar bot
     application.run_polling(
         drop_pending_updates=True,
