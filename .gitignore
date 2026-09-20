@@ -1,0 +1,48 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Entornos virtuales
+venv/
+env/
+ENV/
+.venv/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+data/logs/
+
+# Base de datos local (Railway creará la suya)
+data/*.db
+data/*.sqlite
+*.db
+*.sqlite
+
+# Backups locales
+data/backups/
+
+# Exports locales
+data/exports/
+
+# Variables de entorno
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporal
+tmp/
+temp/
