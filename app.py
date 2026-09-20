@@ -78,81 +78,88 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 async def post_init(application):
-    """InicializaciÃƒÂ³n despuÃƒÂ©s de que se crea la aplicaciÃƒÂ³n"""
-    # Inicializar base de datos
-    await db.init()
-    
-    # Iniciar scheduler con el contexto
-    scheduler_module.start(application)
-    
+    """InicializaciÃƒÆ’Ã‚Â³n despuÃƒÆ’Ã‚Â©s de que se crea la aplicaciÃƒÆ’Ã‚Â³n"""
+        from telegram import BotCommand
+    commands = [
+        BotCommand("buscar", "🕞 Encuentra tu próximo libro"),
+        BotCommand("directorio", "🗂️ Explora elíndice de autores"),
+        BotCommand("pedir", "📖 Pide un libro que no encuentres"),
+        BotCommand("clasicos", "🏋️ Busca libros clásicos (<1950)"),
+        BotCommand("lanzamientos", "✨ Busca libros recientes"),
+        BotCommand("topaportadores", "🏆 Ranking de la comunidad"),
+        BotCommand("ayuda", "ℤ️ Manual interactivo del bot")
+    ]
+    try:
+        await application.bot.set_my_commands(commands)
+    except Exception as e:
+        print(f"Error seteando comandos: {e}")
+
     from telegram import BotCommand
     commands = [
-        BotCommand("buscar", "Ã°Å¸â€Â Encuentra tu prÃƒÂ³ximo libro"),
-        BotCommand("directorio", "Ã°Å¸â€”â€šÃ¯Â¸Â Explora el ÃƒÂ­ndice de autores"),
-        BotCommand("pedir", "Ã°Å¸â„¢â€¹Ã¢â‚¬ÂÃ¢â„¢â‚¬Ã¯Â¸Â Pide un libro que no encuentres"),
-        BotCommand("clasicos", "Ã°Å¸â€¢Â°Ã¯Â¸Â Busca libros clÃƒÂ¡sicos (<1950)"),
-        BotCommand("lanzamientos", "Ã°Å¸â€ â€¢ Busca libros recientes"),
-        BotCommand("topaportadores", "Ã°Å¸Ââ€  Ranking de la comunidad"),
-        BotCommand("ayuda", "Ã°Å¸â€™Â¡ Manual interactivo del bot")
+        BotCommand("buscar", "Encuentra tu proximo libro"),
+        BotCommand("directorio", "Explora el indice de autores"),
+        BotCommand("pedir", "Pide un libro que no encuentres"),
+        BotCommand("clasicos", "Busca libros clasicos (<1950)"),
+        BotCommand("lanzamientos", "Busca libros recientes"),
+        BotCommand("topaportadores", "Ranking de la comunidad"),
+        BotCommand("ayuda", "Manual interactivo del bot")
     ]
     try:
         await application.bot.set_my_commands(commands)
     except Exception as e:
         print(f"Error seteando comandos: {e}")
         
-    print(f"OK - Seelie inicializado correctamente")
-    print(f"Modo: {config.MODE}")
     print(f"Modo prueba: {config.TEST_MODE_ACTIVE}")
 
 def run_bot():
     """Ejecutar el bot de Telegram"""
-    # Crear aplicaciÃƒÂ³n
+    # Crear aplicaciÃƒÆ’Ã‚Â³n
     application = ApplicationBuilder().token(config.BOT_TOKEN).post_init(post_init).build()
     
-    # Comandos admin (inglÃƒÂ©s y espaÃƒÂ±ol)
+    # Comandos admin (inglÃƒÆ’Ã‚Â©s y espaÃƒÆ’Ã‚Â±ol)
     application.add_handler(CommandHandler("start", start_command))
     
-    # ModeraciÃƒÂ³n
+    # ModeraciÃƒÆ’Ã‚Â³n
     application.add_handler(CommandHandler("warn", cmd_warn))
-    application.add_handler(CommandHandler("advertir", cmd_warn))  # espaÃƒÂ±ol
+    application.add_handler(CommandHandler("advertir", cmd_warn))  # espaÃƒÆ’Ã‚Â±ol
     
     application.add_handler(CommandHandler("mute", cmd_mute))
-    application.add_handler(CommandHandler("silenciar", cmd_mute))  # espaÃƒÂ±ol
+    application.add_handler(CommandHandler("silenciar", cmd_mute))  # espaÃƒÆ’Ã‚Â±ol
     
     application.add_handler(CommandHandler("unmute", cmd_unmute))
-    application.add_handler(CommandHandler("desmutear", cmd_unmute))  # espaÃƒÂ±ol
+    application.add_handler(CommandHandler("desmutear", cmd_unmute))  # espaÃƒÆ’Ã‚Â±ol
     
     application.add_handler(CommandHandler("ban", cmd_ban))
-    application.add_handler(CommandHandler("expulsar", cmd_ban))  # espaÃƒÂ±ol
+    application.add_handler(CommandHandler("expulsar", cmd_ban))  # espaÃƒÆ’Ã‚Â±ol
     
-    # InformaciÃƒÂ³n
+    # InformaciÃƒÆ’Ã‚Â³n
     application.add_handler(CommandHandler("checkuser", cmd_checkuser))
-    application.add_handler(CommandHandler("verusuario", cmd_checkuser))  # espaÃƒÂ±ol
+    application.add_handler(CommandHandler("verusuario", cmd_checkuser))  # espaÃƒÆ’Ã‚Â±ol
     
     application.add_handler(CommandHandler("history", cmd_history))
-    application.add_handler(CommandHandler("historial", cmd_history))  # espaÃƒÂ±ol
+    application.add_handler(CommandHandler("historial", cmd_history))  # espaÃƒÆ’Ã‚Â±ol
     
     # Trusted
     application.add_handler(CommandHandler("trust", cmd_trust))
-    application.add_handler(CommandHandler("confiar", cmd_trust))  # espaÃƒÂ±ol
+    application.add_handler(CommandHandler("confiar", cmd_trust))  # espaÃƒÆ’Ã‚Â±ol
     
     application.add_handler(CommandHandler("untrust", cmd_untrust))
-    application.add_handler(CommandHandler("quitarconfianza", cmd_untrust))  # espaÃƒÂ±ol
+    application.add_handler(CommandHandler("quitarconfianza", cmd_untrust))  # espaÃƒÆ’Ã‚Â±ol
     
     # Perdonar
     application.add_handler(CommandHandler("forgive", cmd_forgive))
-    application.add_handler(CommandHandler("perdonar", cmd_forgive))  # espaÃƒÂ±ol
+    application.add_handler(CommandHandler("perdonar", cmd_forgive))  # espaÃƒÆ’Ã‚Â±ol
     
     # Riesgo y config
     application.add_handler(CommandHandler("setrisk", cmd_setrisk))
     application.add_handler(CommandHandler("config", cmd_config))
-    application.add_handler(CommandHandler("ajustes", cmd_config))  # espaÃƒÂ±ol
+    application.add_handler(CommandHandler("ajustes", cmd_config))  # espaÃƒÆ’Ã‚Â±ol
     
     application.add_handler(CommandHandler("modo", cmd_modo))
     
     # Foto
     application.add_handler(CommandHandler("checkfotos", cmd_checkfotos))
-    application.add_handler(CommandHandler("revisarfotos", cmd_checkfotos))  # espaÃƒÂ±ol
+    application.add_handler(CommandHandler("revisarfotos", cmd_checkfotos))  # espaÃƒÆ’Ã‚Â±ol
     
     # Ayuda
     application.add_handler(CommandHandler("ayuda", cmd_ayuda))
@@ -175,12 +182,12 @@ def run_bot():
     
     # Pedidos
     application.add_handler(CommandHandler("done", request_module.cmd_done))
-    application.add_handler(CommandHandler("listo", request_module.cmd_done))  # espaÃƒÂ±ol
+    application.add_handler(CommandHandler("listo", request_module.cmd_done))  # espaÃƒÆ’Ã‚Â±ol
     
     application.add_handler(CommandHandler("pedidos", request_module.cmd_pedidos))
-    application.add_handler(CommandHandler("solicitudes", request_module.cmd_pedidos))  # espaÃƒÂ±ol
+    application.add_handler(CommandHandler("solicitudes", request_module.cmd_pedidos))  # espaÃƒÆ’Ã‚Â±ol
     
-    # Pedido incorrecto - variantes (revisiÃƒÂ³n manual por admin)
+    # Pedido incorrecto - variantes (revisiÃƒÆ’Ã‚Â³n manual por admin)
     application.add_handler(CommandHandler("pedidoincorrecto", cmd_pedidoincorrecto))
     application.add_handler(CommandHandler("pedidoincompleto", cmd_pedidoincompleto))
     application.add_handler(CommandHandler("pedidofueraformato", cmd_pedidofueraformato))
@@ -210,9 +217,9 @@ def run_bot():
     application.add_handler(CommandHandler("lanzamientos", cmd_lanzamientos))
     application.add_handler(CommandHandler("panel", cmd_panel))
     
-    # Manejador de DM interactivo /pedido (ConversationHandler) - inglÃƒÂ©s y espaÃƒÂ±ol
+    # Manejador de DM interactivo /pedido (ConversationHandler) - inglÃƒÆ’Ã‚Â©s y espaÃƒÆ’Ã‚Â±ol
     application.add_handler(request_module.get_conversation_handler())
-    # Alias espaÃƒÂ±ol para /pedido
+    # Alias espaÃƒÆ’Ã‚Â±ol para /pedido
     application.add_handler(ConversationHandler(
         entry_points=[CommandHandler('pedir', request_module.cmd_pedido)],
         states={
@@ -234,7 +241,7 @@ def run_bot():
         handle_new_member
     ))
     
-    # Handler para solicitudes de uniÃƒÂ³n
+    # Handler para solicitudes de uniÃƒÆ’Ã‚Â³n
     application.add_handler(ChatJoinRequestHandler(handle_join_request))
     
     # Handler para actualizaciones de estado de miembros (ej. uso de links)
@@ -246,7 +253,7 @@ def run_bot():
         handle_group_message
     ))
     
-    # Handler de mensajes privados (Fase 5: ReenvÃƒÂ­os y OCR)
+    # Handler de mensajes privados (Fase 5: ReenvÃƒÆ’Ã‚Â­os y OCR)
     from handlers.messages import handle_private_message
     application.add_handler(MessageHandler(
         filters.ChatType.PRIVATE & ~filters.COMMAND,
@@ -271,7 +278,7 @@ def run_bot():
     )
 
 def main():
-    """FunciÃ³n principal - inicia bot y servidor web"""
+    """FunciÃƒÂ³n principal - inicia bot y servidor web"""
     print("\n" + "=" * 60)
     print("SEELIE - SISTEMA DE MODERACION")
     print("=" * 60)

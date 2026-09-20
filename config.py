@@ -1,6 +1,6 @@
-"""
-ConfiguraciÃ³n central de Seelie
-Todos los parÃ¡metros configurables del bot
+﻿"""
+ConfiguraciÃƒÂ³n central de Seelie
+Todos los parÃƒÂ¡metros configurables del bot
 """
 
 # ===== TOKEN DEL BOT =====
@@ -14,11 +14,11 @@ ADMIN_IDS = [1950304369]  # Lista de TODOS los admins (backup + comandos)
 
 # Grupos
 GROUP_ID = -1003758751452          # Grupo principal
-GROUP_NAME = "Seelie's Library â™¡"   # Nombre del grupo para mensajes
+GROUP_NAME = "Seelie's Library"   # Nombre del grupo para mensajes
 GROUP_RESPALDO_ID = -1003825278496 # Grupo de respaldo
 
 # Alertas (en grupo de respaldo)
-ALERT_GROUP_ID = GROUP_RESPALDO_ID  # Grupo donde estÃ¡n las alertas
+ALERT_GROUP_ID = GROUP_RESPALDO_ID  # Grupo donde estÃƒÂ¡n las alertas
 ALERT_TOPIC_ID = 37738              # Tema de Alertas en grupo de respaldo
 
 # Temas de Backup en Grupo de Respaldo
@@ -29,11 +29,11 @@ BACKUP_BIBLIOTECA_ING_TOPIC = 13612  # Tema "Biblioteca ENG" en grupo respaldo
 # Temas (Topics) del Grupo Principal
 TOPIC_ADMINISTRACION = 19462  # Avisos de Seelie a miembros
 TOPIC_PETICIONES = 3          # Solicitudes de libros
-TOPIC_BIBLIOTECA_ESP = 4      # Biblioteca en espaÃ±ol
-TOPIC_BIBLIOTECA_ING = 5      # Biblioteca en inglÃ©s
+TOPIC_BIBLIOTECA_ESP = 4      # Biblioteca en espaÃƒÂ±ol
+TOPIC_BIBLIOTECA_ING = 5      # Biblioteca en inglÃƒÂ©s
 TOPIC_GENERAL = None            # General no usa thread_id en la API
 
-# ===== CONFIGURACIÃ“N DE MODERACIÃ“N =====
+# ===== CONFIGURACIÃƒâ€œN DE MODERACIÃƒâ€œN =====
 
 # Tiempos (en horas)
 PHOTO_DEADLINE_HOURS = 24
@@ -47,7 +47,7 @@ MAX_WARNINGS_BEFORE_BAN = 4
 FLOOD_WARNINGS_BEFORE_BAN = 2
 FLOOD_TIME_WINDOW_MINUTES = 30
 
-# DuraciÃ³n de Mutes (en minutos)
+# DuraciÃƒÂ³n de Mutes (en minutos)
 MUTE_DURATION_1 = 60      # 1 hora
 MUTE_DURATION_2 = 360     # 6 horas
 MUTE_DURATION_3 = 1440    # 24 horas
@@ -88,7 +88,7 @@ MODE = "produccion"  # "produccion", "prueba", "silencioso"
 TEST_MODE_ACTIVE = False
 SILENT_MODE_ACTIVE = False
 
-# ===== CONFIGURACIÃ“N DE TRUSTED =====
+# ===== CONFIGURACIÃƒâ€œN DE TRUSTED =====
 TRUSTED_AUTO_PROMOTION = True
 TRUSTED_WARNINGS_TO_LOSE = 3
 TRUSTED_REQUIREMENTS = {
@@ -99,7 +99,7 @@ TRUSTED_REQUIREMENTS = {
     'never_banned': True
 }
 
-# ===== CONFIGURACIÃ“N DE USUARIOS NUEVOS =====
+# ===== CONFIGURACIÃƒâ€œN DE USUARIOS NUEVOS =====
 NEW_USER_WATCH_MINUTES = 60
 NEW_USER_SUSPICIOUS_CHECKS = [
     'sin_foto',
@@ -122,7 +122,7 @@ WEEKLY_MAINTENANCE_DAY = 'sun'
 WEEKLY_MAINTENANCE_HOUR = 3
 
 # ===== BIBLIOTECA / TELEGRAM =====
-# LÃ­mite de descarga de bots (Telegram). Archivos mÃ¡s grandes se dejan sin renombrar.
+# LÃƒÂ­mite de descarga de bots (Telegram). Archivos mÃƒÂ¡s grandes se dejan sin renombrar.
 TELEGRAM_BOT_DOWNLOAD_LIMIT = 20 * 1024 * 1024
 JOIN_REQUEST_TIMEOUT_HOURS = 24
 
@@ -138,7 +138,7 @@ REQUEST_FORMAT = {
     'formato': True
 }
 
-# ===== DETECCIÃ“N DE DUPLICADOS =====
+# ===== DETECCIÃƒâ€œN DE DUPLICADOS =====
 DUPLICATE_SIMILARITY_THRESHOLD = 0.85  # 85% de similitud
 
 # ===== LOGS =====
